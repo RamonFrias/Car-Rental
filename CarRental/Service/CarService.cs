@@ -6,13 +6,13 @@ using CarRental.Verifications;
 
 namespace CarRental.Service {
     class CarService : CarRepository {
-        public static void AddNewCar(Dictionary<int, Car> repository) {
+        public static void AddNewCar(Dictionary<DateCarRegisters, Car> repository) {
             bool verifiedAnswerds;
             string brand, model, color, licensePlate;
             int id = 1;
 
             do {
-                foreach (KeyValuePair<int, Car> ids in repository) {
+                foreach (KeyValuePair<DateCarRegisters, Car> ids in repository) {
                     id++;
                 }
 
@@ -38,13 +38,14 @@ namespace CarRental.Service {
             } while (verifiedAnswerds == false);
 
             Car car = new Car(id, brand, model, color, licensePlate);
+            DateCarRegisters date = new DateCarRegisters(DateTime.Now);
 
-            repository.Add(id, car);
+            repository.Add(date, car);
         }
 
-        public static void ViewVehicles(Dictionary<int, Car> repository) {
-            foreach (KeyValuePair<int, Car> cars in repository) {
-                Console.WriteLine($"Id - {cars.Key} \nModel - {cars.Value.Model} \nBrand - {cars.Value.Brand} \nColor - {cars.Value.Color} \nLicnese plate - {cars.Value.LicensePlates}");
+        public static void ViewVehicles(Dictionary<DateCarRegisters, Car> repository) {
+            foreach (KeyValuePair<DateCarRegisters, Car> cars in repository) {
+                Console.WriteLine($"Id - {cars.Value.Id} \nModel - {cars.Value.Model} \nBrand - {cars.Value.Brand} \nColor - {cars.Value.Color} \nLicnese plate - {cars.Value.LicensePlates} \nRegister date: {cars.Key.DateCarRegister}");
                 Console.WriteLine();
             }
             Console.WriteLine("Press any key to continue!");

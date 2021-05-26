@@ -11,11 +11,9 @@ namespace CarRental {
 
         static void Main(string[] args) {
             int menuOption;
-            Dictionary<int, Car> repository = CarRepository.LocalCarRepository();
+            Dictionary<DateCarRegisters, Car> repository = CarRepository.LocalCarRepository();
             do {
                 menuOption = MenuControler.Menu();
-
-
 
                 switch (menuOption) {
                     case 1:
