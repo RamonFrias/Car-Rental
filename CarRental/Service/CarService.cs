@@ -83,5 +83,14 @@ namespace CarRental.Service {
 
             Console.Clear();
         }
+
+        public static void ViewRentedVehicles(Dictionary<DateCarRegisters, Car> rentedCarRepository) {
+            foreach (KeyValuePair<DateCarRegisters, Car> cars in rentedCarRepository) {
+                Console.WriteLine($"Id - {cars.Value.Id} \nModel - {cars.Value.Model} \nBrand - {cars.Value.Brand} \nColor - {cars.Value.Color} \nLicnese plate - {cars.Value.LicensePlates} \nRegister date: {cars.Key.DateCarRegister}");
+                Console.WriteLine();
+            }
+            Console.WriteLine("Press any key to continue!");
+            Console.ReadLine();
+        }
     }
 }
