@@ -11,20 +11,24 @@ namespace CarRental {
 
         static void Main(string[] args) {
             int menuOption;
-            Dictionary<DateCarRegisters, Car> repository = CarRepository.LocalCarRepository();
+            Dictionary<DateCarRegisters, Car> carRepository = CarRepository.LocalCarRepository();
+
+            Dictionary<DateCarRegisters, Car> rentedCarRepository = RentedCarsRepository.LocalRentedCarsRepository();
             do {
+                Console.Clear();
+
                 menuOption = MenuControler.Menu();
 
                 switch (menuOption) {
                     case 1:
-                        CarService.AddNewCar(repository);
+                        CarService.AddNewCar(carRepository);
                         break;
 
                     case 2:
-                        CarService.ViewVehicles(repository);
+                        CarService.ViewVehicles(carRepository);
                         break;
 
-                    case 3:
+                    case 3: CarService.RentedVehicle(carRepository, rentedCarRepository);
                         break;
 
                     case 4:
