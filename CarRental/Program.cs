@@ -28,10 +28,12 @@ namespace CarRental {
                         CarService.ViewVehicles(carRepository);
                         break;
 
-                    case 3: CarService.RentedVehicle(carRepository, rentedCarRepository);
+                    case 3: 
+                        CarService.RentedVehicle(carRepository, rentedCarRepository);
                         break;
 
-                    case 4: CarService.ViewRentedVehicles(rentedCarRepository);
+                    case 4: 
+                        CarService.ViewRentedVehicles(rentedCarRepository);
                         break;
                 }
             } while (menuOption != 5);

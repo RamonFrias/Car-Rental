@@ -33,6 +33,8 @@ namespace CarRental.Service {
                 if (verifiedAnswerds == false) {
                     Console.WriteLine("Incorrect informations !! Please press any key to continue.");
                     Console.ReadLine();
+
+                    Console.Clear();
                 }
             } while (verifiedAnswerds == false);
 
