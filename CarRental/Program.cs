@@ -14,6 +14,9 @@ namespace CarRental {
             Dictionary<DateCarRegisters, Car> carRepository = CarRepository.LocalCarRepository();
 
             Dictionary<DateCarRegisters, Car> rentedCarRepository = RentedCarsRepository.LocalRentedCarsRepository();
+
+            Dictionary<DateCarRegisters, Car> availableCarsRepository = AvailableCarsRepository.AvailableCarRepository();
+
             do {
                 Console.Clear();
 
@@ -21,7 +24,7 @@ namespace CarRental {
 
                 switch (menuOption) {
                     case 1:
-                        CarService.AddNewCar(carRepository);
+                        CarService.AddNewCar(carRepository, availableCarsRepository);
                         break;
 
                     case 2:
@@ -29,14 +32,17 @@ namespace CarRental {
                         break;
 
                     case 3: 
-                        CarService.RentedVehicle(carRepository, rentedCarRepository);
+                        CarService.RentedVehicle(carRepository, rentedCarRepository, availableCarsRepository);
                         break;
 
                     case 4: 
                         CarService.ViewRentedVehicles(rentedCarRepository);
                         break;
+
+                    case 5: CarService.ViewAvailableCars(availableCarsRepository);
+                        break;
                 }
-            } while (menuOption != 5);
+            } while (menuOption != 6);
         }
     }
 }

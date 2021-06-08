@@ -15,7 +15,8 @@ namespace CarRental.Controler {
                 { 2, "View cars" },
                 { 3, "Rent a car" },
                 { 4, "View rented cars" },
-                { 5, "Exit" }
+                { 5, "View available cars"},
+                { 6, "Exit" }
               };
 
                 Console.WriteLine("---------- Menu --------------");

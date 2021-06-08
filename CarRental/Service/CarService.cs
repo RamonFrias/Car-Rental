@@ -6,12 +6,12 @@ using CarRental.Verifications;
 
 namespace CarRental.Service {
     class CarService : CarRepository {
-        public static void AddNewCar(Dictionary<DateCarRegisters, Car> repository) {
+        public static void AddNewCar(Dictionary<DateCarRegisters, Car> carRepository, Dictionary<DateCarRegisters, Car> availableCarRepository) {
             bool verifiedAnswerds;
             string brand, model, color, licensePlate;
             int id = 1;
             
-            foreach (KeyValuePair<DateCarRegisters, Car> ids in repository) {
+            foreach (KeyValuePair<DateCarRegisters, Car> ids in carRepository) {
                 id++;
             }
 
@@ -41,7 +41,9 @@ namespace CarRental.Service {
             Car car = new Car(id, brand, model, color, licensePlate);
             DateCarRegisters date = new DateCarRegisters(DateTime.Now);
 
-            repository.Add(date, car);
+            carRepository.Add(date, car);
+            availableCarRepository.Add(date, car);
+
 
             Console.WriteLine("\nSuccess !! The car was rented \nPlease press any key to continue");
             Console.ReadLine();
@@ -58,7 +60,7 @@ namespace CarRental.Service {
             Console.ReadLine();
         }
 
-        public static void RentedVehicle(Dictionary<DateCarRegisters, Car> carRepository, Dictionary<DateCarRegisters, Car> rentedCarRepository) {
+        public static void RentedVehicle(Dictionary<DateCarRegisters, Car> carRepository, Dictionary<DateCarRegisters, Car> rentedCarRepository, Dictionary<DateCarRegisters, Car> availableCarRepository) {
             ViewVehicles(carRepository);
 
             Console.WriteLine("\nInform the Id of the car to be rented:");
@@ -70,7 +72,8 @@ namespace CarRental.Service {
                 if (id == cars.Value.Id) {
                     rentedCarRepository.Add(cars.Key, cars.Value);
                     idVerification = true;
-                    cars.Value.Status = "Unavaiable";
+                    cars.Value.Status = "Unavailable";
+                    RemoveUnavailableCarInAvailableRepository(availableCarRepository, id);
                 }
             }
 
@@ -93,6 +96,25 @@ namespace CarRental.Service {
             }
             Console.WriteLine("Press any key to continue!");
             Console.ReadLine();
+        }
+
+        public static void ViewAvailableCars(Dictionary<DateCarRegisters, Car> availableCarRepository) {
+            foreach (KeyValuePair<DateCarRegisters, Car> car in availableCarRepository) {
+                Console.WriteLine($"Id - {car.Value.Id} \nModel - {car.Value.Model} \nBrand - {car.Value.Brand} \nColor - {car.Value.Color} \nLicnese plate - {car.Value.LicensePlates} \nRegister date: {car.Key.DateCarRegister}");
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("Press any key to continue!");
+            Console.ReadLine();
+        }
+
+        public static void RemoveUnavailableCarInAvailableRepository(Dictionary<DateCarRegisters, Car> availableCarRepository, int id) {
+
+            foreach (KeyValuePair<DateCarRegisters, Car> cars in availableCarRepository) {
+                if (id == cars.Value.Id) {
+                    availableCarRepository.Remove(cars.Key);
+                }
+            }
         }
     }
 }
